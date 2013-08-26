@@ -6,10 +6,10 @@ Gem::Specification.new do |gem|
   gem.name          = "softers"
   gem.version       = Softers::VERSION
   gem.authors       = ["Lauri Nevala"]
-  gem.email         = ["lauri.nevala@gmail.fi"]
+  gem.email         = ["lauri.nevala@gmail.com"]
   gem.description   = "A simple wrapper for the Softers SMS API"
   gem.summary       = "see description"
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/nevalla/softers"
 
   gem.files         = `git ls-files`.split($/)
   gem.add_dependency('json', ['~> 1.5'])
