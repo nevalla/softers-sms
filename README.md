@@ -1,6 +1,6 @@
 A simple wrapper for the [Softers](http://www.softers.net/) SMS API
 =======================================================
-
+[![Build Status](https://travis-ci.org/nevalla/softers.png?branch=master)](https://travis-ci.org/nevalla/softers)
 ## Installation
 
 Add this line to your application's Gemfile:
