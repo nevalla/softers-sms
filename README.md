@@ -19,7 +19,8 @@ Or install it yourself as:
 
 Construct a client object with your Softers API credentials:
 
-    nexmo = Nexmo::Client.new('...username...', '...password...')
+    softers = Softers::Client.new('...username...', '...password...')
+    softers.send_message({to_phone: '+3585551144', message: 'Hey!'})
 
 
 
