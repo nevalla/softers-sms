@@ -4,7 +4,6 @@ require 'json'
 require 'uri'
 
 module Softers
-  VERSION = "0.0.1"
 
   class Client
     def initialize(username, password)
