@@ -1,6 +1,6 @@
 A Ruby wrapper for the [Softers](http://www.softers.net/) SMS API
 =======================================================
-[![Build Status](https://travis-ci.org/nevalla/softers.png?branch=master)](https://travis-ci.org/nevalla/softers-sms)
+[![Build Status](https://travis-ci.org/nevalla/softers-sms.png?branch=master)](https://travis-ci.org/nevalla/softers-sms)
 ## Installation
 
 Add this line to your application's Gemfile:
