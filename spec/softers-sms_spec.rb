@@ -26,35 +26,35 @@ describe SoftersSms::Client do
       @headers = {'Content-Type' => 'application/x-www-form-urlencoded'}
     end
 
-    it 'should make the correct http call return a successful response if the first message status equals 200' do
+    it 'should make the correct http call return a successful response body equals 200 OK' do
 
       # Stub out post request
-      http_response = stub(:code => "200", :body => 'Some content')
+      http_response = stub(:code => "200", :body => '200 OK')
 
 
-      data = 'to_phone=number&message=Hey%21&type=send&username=key&password=secret'
+      data = 'to_phone=number&message=Hey%21&username=key&password=secret'
 
-      @client.http.expects(:post).with('/messaging/smsclient.php', data, @headers).returns(http_response)
+      @client.http.expects(:post).with('/messaging/smsclient.php?type=send', data, @headers).returns(http_response)
 
       response = @client.send_message({to_phone: 'number', message: 'Hey!'})
 
       response.success?.must_equal(true)
     end
 
-    it 'should return failure response if status code does not equal 200' do
+    it 'should return failure response if response body does not equal 200 OK' do
 
       # Stub out post request
-      http_response = stub(:code => "404", :body => 'Not found\r\nUnable to find user information')
+      http_response = stub(:code => "200", :body => '404 Not found\r\nUnable to find user information')
 
-      data = 'to_phone=number&message=Hey%21&type=send&username=key&password=secret'
+      data = 'to_phone=number&message=Hey%21&username=key&password=secret'
 
-      @client.http.expects(:post).with('/messaging/smsclient.php', data, @headers).returns(http_response)
+      @client.http.expects(:post).with('/messaging/smsclient.php?type=send', data, @headers).returns(http_response)
 
       response = @client.send_message({to_phone: 'number', message: 'Hey!'})
 
       response.success?.must_equal(false)
       response.failure?.must_equal(true)
-      response.error.to_s.must_equal('Not found\r\nUnable to find user information (status=404)')
+      response.error.to_s.must_equal('404 Not found\r\nUnable to find user information')
 
     end
   end

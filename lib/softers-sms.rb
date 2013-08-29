@@ -18,17 +18,17 @@ module SoftersSms
     attr_accessor :username, :password, :http, :headers
 
     def send_message(data)
-      response = @http.post('/messaging/smsclient.php', encode(data), headers)
-      if response.code.to_s == "200"
+      response = @http.post('/messaging/smsclient.php?type=send', encode(data), headers)
+      if response.body.strip == "200 OK"
         Success.new(true)
       else
-        Failure.new(Error.new("#{response.body} (status=#{response.code.to_s})"))
+        Failure.new(Error.new("#{response.body}"))
       end
 
     end
 
     def encode(data)
-      URI.encode_www_form data.merge(:type => 'send',:username => @username, :password => @password)
+      URI.encode_www_form data.merge(:username => @username, :password => @password)
     end
 
   end
