@@ -1,11 +1,11 @@
 A Ruby wrapper for the [Softers](http://www.softers.net/) SMS API
 =======================================================
-[![Build Status](https://travis-ci.org/nevalla/softers.png?branch=master)](https://travis-ci.org/nevalla/softers)
+[![Build Status](https://travis-ci.org/nevalla/softers.png?branch=master)](https://travis-ci.org/nevalla/softers-sms)
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'softers'
+    gem 'softers-sms'
 
 And then execute:
 
@@ -13,14 +13,14 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install softers
+    $ gem install softers-sms
 
 ## Usage
 
 Construct a client object with your Softers API credentials:
 
-    softers = Softers::Client.new('...username...', '...password...')
-    softers.send_message({to_phone: '+3585551144', message: 'Hey!'})
+    @client = SoftersSms::Client.new('...username...', '...password...')
+    @client.send_message({to_phone: '+3585551144', message: 'Hey!'})
 
 
 
@@ -31,3 +31,8 @@ Construct a client object with your Softers API credentials:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+## Credits
+
+This gem is influenced by [Nexmo](https://github.com/timcraft/nexmo) gem, originally by Tim Craft

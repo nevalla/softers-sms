@@ -1,11 +1,11 @@
 require 'minitest/autorun'
 require 'mocha/setup'
 
-require_relative '../lib/softers'
+require_relative '../lib/softers-sms'
 
-describe Softers::Client do
+describe SoftersSms::Client do
   before do
-    @client = Softers::Client.new('key', 'secret')
+    @client = SoftersSms::Client.new('key', 'secret')
   end
 
   describe 'http method' do
@@ -38,13 +38,13 @@ describe Softers::Client do
 
       response = @client.send_message({to_phone: 'number', message: 'Hey!'})
 
-      response.must_equal(true)
+      response.success?.must_equal(true)
     end
 
     it 'should return failure response if status code does not equal 200' do
 
       # Stub out post request
-      http_response = stub(:code => "404", :body => 'Not found')
+      http_response = stub(:code => "404", :body => 'Not found\r\nUnable to find user information')
 
       data = 'to_phone=number&message=Hey%21&type=send&username=key&password=secret'
 
@@ -52,7 +52,10 @@ describe Softers::Client do
 
       response = @client.send_message({to_phone: 'number', message: 'Hey!'})
 
-      response.must_equal(false)
+      response.success?.must_equal(false)
+      response.failure?.must_equal(true)
+      response.error.to_s.must_equal('Not found\r\nUnable to find user information (status=404)')
+
     end
   end
 end
