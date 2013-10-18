@@ -18,6 +18,7 @@ module SoftersSms
     attr_accessor :username, :password, :http, :headers
 
     def send_message(data)
+      data[:message] = data[:message].encode('ISO-8859-1')
       response = @http.post('/messaging/smsclient.php?type=send', encode(data), headers)
       if response.body.strip == "200 OK"
         Success.new(true)
